@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>memo</key>
+	<string></string>
+	<key>category</key>
+	<string></string>
+	<key>amount</key>
+	<integer>0</integer>
+	<key>date</key>
+	<date>2021-11-24T05:18:58Z</date>
+</dict>
+</plist>

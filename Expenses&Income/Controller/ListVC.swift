@@ -11,10 +11,35 @@ class ListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+//        if let expenseRecord = self.getExpense(){
+//
+//        }
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    
+//    func getExpense() -> Expenses {
+//        /*
+//            1. find the url of the plist file
+//            2. Create data from the content of url
+//            3. Decode the data and get the expenses
+//            4. Update the UI (testing the flow)
+//         */
+//
+//        let decoder = PropertyListDecoder()
+//
+//        let url = Bundle.main.url(forResource: "Expenses", withExtension: "plist")!
+//
+//        if let data = try? Data(contentsOf: url){
+//            if let expenseRecord = try? decoder.decode(Expenses.self, from: data){
+//                return expenseRecord
+//            }
+//        }
+//        return nil
+//    }
 
     /*
     // MARK: - Navigation

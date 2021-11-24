@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol CategoryCollectionDelegate{
+    func passCategoryBack(selectedCat: String)
+}
+
 class CategoryCollectionVC: UICollectionViewController {
     
+    var delegate: CategoryCollectionDelegate?
     private let itemsPerRow: CGFloat = 3
     private let sectionInsets = UIEdgeInsets(
       top: 10.0,
@@ -36,20 +41,36 @@ class CategoryCollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         
         cell.catTitle.text = ""
-        //cell.catImage.image = ""
         
-        cell.catTitle.text = expenseCat[indexPath.row]
-        cell.catImage.image = UIImage(systemName: expenseImage[indexPath.row])
-        
-        
+        cell.catTitle.text = expenseCat[indexPath.row][0]
+        cell.catImage.image = UIImage(systemName: expenseCat[indexPath.row][1])
         
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected category: \(expenseCat[indexPath.row][0])")
+//        if let delegate = delegate{
+//            delegate.passCategoryBack(selectedCat: expenseCat[indexPath.row][0])
+//        }
+        self.delegate?.passCategoryBack(selectedCat: expenseCat[indexPath.row][0])
+//        if self.delegate != nil {
+//            self.delegate?.passCategoryBack(selectedCat: expenseCat[indexPath.row][0])
+//            print("in delegate")
+//        }
+        
+//        let vc = ExpenseTableVC()
+//        vc.expenseRecord.category = expenseCat[indexPath.row][0]
+        
+//        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popViewController(animated: true)
+    }
     
-
- 
+    
+    
+    
 }
+
 
 extension CategoryCollectionVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

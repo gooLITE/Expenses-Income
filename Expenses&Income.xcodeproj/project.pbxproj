@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBB47CB0274DED7F00E74E39 /* Expenses.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBB47CAF274DED7F00E74E39 /* Expenses.plist */; };
 		DD10340D2724714A00BAEBC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD10340C2724714A00BAEBC8 /* AppDelegate.swift */; };
 		DD10340F2724714A00BAEBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD10340E2724714A00BAEBC8 /* SceneDelegate.swift */; };
 		DD1034112724714A00BAEBC8 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1034102724714A00BAEBC8 /* CalendarVC.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BBB47CAF274DED7F00E74E39 /* Expenses.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Expenses.plist; sourceTree = "<group>"; };
 		DD1034092724714A00BAEBC8 /* Expenses&Income.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expenses&Income.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD10340C2724714A00BAEBC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD10340E2724714A00BAEBC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				DD1034182724715300BAEBC8 /* Assets.xcassets */,
 				DD10341A2724715300BAEBC8 /* LaunchScreen.storyboard */,
 				DD10341D2724715300BAEBC8 /* Info.plist */,
+				BBB47CAF274DED7F00E74E39 /* Expenses.plist */,
 			);
 			path = "Expenses&Income";
 			sourceTree = "<group>";
@@ -87,10 +90,10 @@
 			children = (
 				DDCC4F99273052CA00CC67E5 /* Constant.swift */,
 				DD1034102724714A00BAEBC8 /* CalendarVC.swift */,
-				DD10342627257C2800BAEBC8 /* NewVC.swift */,
 				DDCC4F8D2725C92F00CC67E5 /* ListVC.swift */,
-				DDCC4F8F272D479A00CC67E5 /* CategoryCollectionVC.swift */,
+				DD10342627257C2800BAEBC8 /* NewVC.swift */,
 				DDCC4F93272D4E6C00CC67E5 /* ExpenseTableVC.swift */,
+				DDCC4F8F272D479A00CC67E5 /* CategoryCollectionVC.swift */,
 				DDCC4F9B27397F2C00CC67E5 /* CategoryCell.swift */,
 			);
 			path = Controller;
@@ -173,6 +176,7 @@
 				DD10341C2724715300BAEBC8 /* LaunchScreen.storyboard in Resources */,
 				DD1034192724715300BAEBC8 /* Assets.xcassets in Resources */,
 				DD1034142724714A00BAEBC8 /* Main.storyboard in Resources */,
+				BBB47CB0274DED7F00E74E39 /* Expenses.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

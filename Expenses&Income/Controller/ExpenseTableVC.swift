@@ -7,28 +7,46 @@
 
 import UIKit
 
-class ExpenseTableVC: UITableViewController {
+protocol sendRecordBackDelegate {
+    func sendRecordBack(record: Expenses)
+}
+
+
+
+class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollectionDelegate{
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var amountTF: UITextField!
-    @IBOutlet weak var memoTF: UITextField!
     @IBOutlet weak var catLabel: UILabel!
+    @IBOutlet weak var memoTF: UITextField!
+
     
+    var delegate: sendRecordBackDelegate?
+    var expenseRecord = Expenses(date: "", amount: 0.00, category: "nothing", memo: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("again??")
+        catLabel?.text = expenseRecord.category
+        
         //datePicker lines
-        datePicker.date = NSDate() as Date
+        datePicker?.date = NSDate() as Date
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy"
         let dateString: String = dateFormatter.string(from: self.datePicker.date)
         dateLabel.text = dateString
-        
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        //tableView.reloadData()
+//        print("in viewWillAppear: \(expenseRecord.category)")
+//        catLabel.text = expenseRecord.category
+//
+//    }
     
     //remove header
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -65,6 +83,53 @@ class ExpenseTableVC: UITableViewController {
         dateFormatter.dateFormat = "EEE, dd MMM yyyy"
         let dateString: String = dateFormatter.string(from: self.datePicker.date)
         dateLabel.text = dateString
+        expenseRecord.date = dateString
+        
+        if let delegate = delegate {
+            delegate.sendRecordBack(record: expenseRecord)
+        }
+        
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        //expenseRecord.amount = Double(textField.text)
+        
+        if let delegate = delegate {
+            delegate.sendRecordBack(record: expenseRecord)
+        }
+        
+        textField.endEditing(true)
+    }
+    
+    func passCategoryBack(selectedCat: String) {
+        self.expenseRecord.category = selectedCat
+        print("in expenseTableVC, passCategoryBack: \(expenseRecord.category)")
+        catLabel.text = selectedCat
+        
+    }
+    
+    
+    
+//    func saveData(){
+//        let encoder = PropertyListEncoder();encoder.outputFormat = .xml
+//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask[0].description.appendingPathComponent("Expenses.plist"))
+//
+//        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+//        var path = paths.stringByAppendingPathComponent("data.plist")
+//        var fileManager = NSFileManager.defaultManager()
+//
+//
+//    }
+    
+    
+    
 }
+
+
+//extension ExpenseTableVC: CategoryCollectionDelegate{
+//    func passCategoryBack(selectedCat: String) {
+//        self.expenseRecord.category = selectedCat
+//        print("in passCatagoryBack, expenseRecord: \(expenseRecord)")
+//    }
+//}
