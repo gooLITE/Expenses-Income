@@ -13,7 +13,7 @@ protocol sendRecordBackDelegate {
 
 
 
-class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollectionDelegate{
+class ExpenseTableVC: UITableViewController, UITextFieldDelegate{
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -22,14 +22,11 @@ class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollec
     @IBOutlet weak var catLabel: UILabel!
     @IBOutlet weak var memoTF: UITextField!
 
-    
-    var delegate: sendRecordBackDelegate?
-    var expenseRecord = Expenses(date: "", amount: 0.00, category: "nothing", memo: "")
+    var expenseRecord = Expenses(date: "", amount: 0.00, category: "Food", memo: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("again??")
         catLabel?.text = expenseRecord.category
         
         //datePicker lines
@@ -39,14 +36,10 @@ class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollec
         dateFormatter.dateFormat = "EEE, dd MMM yyyy"
         let dateString: String = dateFormatter.string(from: self.datePicker.date)
         dateLabel.text = dateString
+        
+        
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        //tableView.reloadData()
-//        print("in viewWillAppear: \(expenseRecord.category)")
-//        catLabel.text = expenseRecord.category
-//
-//    }
+
     
     //remove header
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -64,6 +57,8 @@ class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollec
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let dateTFPath = NSIndexPath(row: 0, section: 0)
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
 //
 //        if dateTFPath as IndexPath == indexPath {
 //
@@ -78,6 +73,12 @@ class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollec
 
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? CategoryCollectionVC{
+            destinationVC.delegate = self
+        }
+    }
+    
     @IBAction func dateChanged(_ sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy"
@@ -85,31 +86,15 @@ class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollec
         dateLabel.text = dateString
         expenseRecord.date = dateString
         
-        if let delegate = delegate {
-            delegate.sendRecordBack(record: expenseRecord)
-        }
-        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         //expenseRecord.amount = Double(textField.text)
         
-        if let delegate = delegate {
-            delegate.sendRecordBack(record: expenseRecord)
-        }
-        
         textField.endEditing(true)
     }
-    
-    func passCategoryBack(selectedCat: String) {
-        self.expenseRecord.category = selectedCat
-        print("in expenseTableVC, passCategoryBack: \(expenseRecord.category)")
-        catLabel.text = selectedCat
-        
-    }
-    
-    
+  
     
 //    func saveData(){
 //        let encoder = PropertyListEncoder();encoder.outputFormat = .xml
@@ -121,15 +106,15 @@ class ExpenseTableVC: UITableViewController, UITextFieldDelegate, CategoryCollec
 //
 //
 //    }
-    
-    
-    
 }
 
 
-//extension ExpenseTableVC: CategoryCollectionDelegate{
-//    func passCategoryBack(selectedCat: String) {
-//        self.expenseRecord.category = selectedCat
-//        print("in passCatagoryBack, expenseRecord: \(expenseRecord)")
-//    }
-//}
+extension ExpenseTableVC: CategoryCollectionDelegate{
+    func didUpdateExpenseCat(selectedCat: String) {
+        print("in didUpdateExpenseCat: \(selectedCat)")
+        expenseRecord.category = selectedCat
+        catLabel.text = selectedCat
+        tableView.reloadData()
+    }
+    
+}

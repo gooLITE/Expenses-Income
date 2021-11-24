@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol CategoryCollectionDelegate{
-    func passCategoryBack(selectedCat: String)
+protocol CategoryCollectionDelegate: AnyObject {
+    func didUpdateExpenseCat(selectedCat: String)
 }
 
 class CategoryCollectionVC: UICollectionViewController {
     
-    var delegate: CategoryCollectionDelegate?
+    weak var delegate: CategoryCollectionDelegate?
     private let itemsPerRow: CGFloat = 3
     private let sectionInsets = UIEdgeInsets(
       top: 10.0,
@@ -50,20 +50,9 @@ class CategoryCollectionVC: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected category: \(expenseCat[indexPath.row][0])")
-//        if let delegate = delegate{
-//            delegate.passCategoryBack(selectedCat: expenseCat[indexPath.row][0])
-//        }
-        self.delegate?.passCategoryBack(selectedCat: expenseCat[indexPath.row][0])
-//        if self.delegate != nil {
-//            self.delegate?.passCategoryBack(selectedCat: expenseCat[indexPath.row][0])
-//            print("in delegate")
-//        }
-        
-//        let vc = ExpenseTableVC()
-//        vc.expenseRecord.category = expenseCat[indexPath.row][0]
-        
-//        navigationController?.pushViewController(vc, animated: true)
+        delegate?.didUpdateExpenseCat(selectedCat: expenseCat[indexPath.row][0])
         navigationController?.popViewController(animated: true)
+        
     }
     
     
