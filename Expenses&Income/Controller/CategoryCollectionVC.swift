@@ -45,6 +45,11 @@ class CategoryCollectionVC: UICollectionViewController {
         cell.catTitle.text = expenseCat[indexPath.row][0]
         cell.catImage.image = UIImage(systemName: expenseCat[indexPath.row][1])
         
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 10
+        cell.layer.borderWidth = 5
+        cell.layer.borderColor = UIColor(red: 81/225, green: 113/225, blue: 165/225, alpha: 1).cgColor
+        
         return cell
     }
     
